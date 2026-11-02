@@ -1,12 +1,9 @@
-
 name: sanad
-description: Sanad sales, inventory and accounting app
-publish_to: 'none'
-version: 1.0.0+1
-
+publish_to: none
+description: Sanad sales and inventory Android app
+version: 0.1.0+1
 environment:
   sdk: '>=3.3.0 <4.0.0'
-
 dependencies:
   flutter:
     sdk: flutter
@@ -17,7 +14,6 @@ dependencies:
   printing: ^5.14.2
   share_plus: ^10.1.4
   path_provider: ^2.1.5
-
 flutter:
   uses-material-design: true
   assets:
