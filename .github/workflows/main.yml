@@ -20,10 +20,8 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
+          flutter-version: '3.22.0'
           cache: true
-
-      - name: Create Android project files
-        run: flutter create . --platforms=android
 
       - name: Install dependencies
         run: flutter pub get
