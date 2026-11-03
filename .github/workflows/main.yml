@@ -22,6 +22,15 @@ jobs:
           channel: 'stable'
           cache: true
 
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+        with:
+          packages: 'platform-tools'
+          cmdline-tools-version: '12.0'
+
+      - name: Accept Android Licenses
+        run: yes | sdkmanager --licenses
+
       - name: Create Android files
         run: flutter create --platforms=android .
 
