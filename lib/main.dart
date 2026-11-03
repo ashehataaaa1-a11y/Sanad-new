@@ -224,8 +224,10 @@ class _SanadAppState extends State<SanadApp> {
     darkTheme:ThemeData(useMaterial3:true,brightness:Brightness.dark,colorScheme:ColorScheme.fromSeed(seedColor:gold,brightness:Brightness.dark),
       appBarTheme:const AppBarTheme(backgroundColor:Color(0xFF071C32),foregroundColor:Colors.white),
       inputDecorationTheme:InputDecorationTheme(border:OutlineInputBorder(borderRadius:BorderRadius.circular(14)))),
-    themeMode:mode,
-    home: const SplashScreen(),
+          themeMode: mode,
+      home: const SplashScreen(),
+    ),
+  );
 }
 class BrandBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
