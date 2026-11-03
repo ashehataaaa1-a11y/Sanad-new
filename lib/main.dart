@@ -225,7 +225,7 @@ class _SanadAppState extends State<SanadApp> {
       appBarTheme:const AppBarTheme(backgroundColor:Color(0xFF071C32),foregroundColor:Colors.white),
       inputDecorationTheme:InputDecorationTheme(border:OutlineInputBorder(borderRadius:BorderRadius.circular(14)))),
     themeMode:mode,
-    home:HomePage(mode:mode,onMode:(m)=>setState(()=>mode=m)));
+    home: const SplashScreen(),
 }
 class BrandBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -614,6 +614,71 @@ class InvoiceExport {
       pw.SizedBox(height:5),pw.Center(child:pw.Text('امسح رمز QR لفتح محادثة واتساب مباشرة',style:pw.TextStyle(font:regular,fontSize:8))),
     ]));
     return doc.save();
+  }
+}class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
+  @override State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  int seconds = 5;
+  double progress = 0.0;
+
+  @override
+  void initState() {
+    super.initState();
+    startTimer();
+  }
+
+  void startTimer() {
+    Future.delayed(const Duration(seconds: 1), () {
+      if (mounted) {
+        setState(() {
+          seconds--;
+          progress = (5 - seconds) / 5;
+        });
+        if (seconds > 0) {
+          startTimer();
+        } else {
+          // بعد 5 ثواني نروح للشاشة الرئيسية
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => HomePage(mode: ThemeMode.system, onMode: (m) {})));
+        }
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: navy,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // صورة اللوجو
+            Image.asset('assets/sanad_logo.jpg', height: 150),
+            const SizedBox(height: 30),
+            // العداد التنازلي
+            Text('$seconds', style: const TextStyle(color: gold, fontSize: 50, fontWeight: FontWeight.bold)),
+            const SizedBox(height: 10),
+            const Text('ثواني', style: TextStyle(color: Colors.white, fontSize: 18)),
+            const SizedBox(height: 20),
+            // شريط التحميل
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 50),
+              child: LinearProgressIndicator(
+                value: progress,
+                backgroundColor: Colors.white24,
+                valueColor: const AlwaysStoppedAnimation<Color>(gold),
+                minHeight: 10,
+              ),
+            ),
+            const SizedBox(height: 15),
+            const Text('جاري تشغيل التطبيق...', style: TextStyle(color: Colors.white70)),
+          ],
+        ),
+      ),
+    );
   }
 }
  
